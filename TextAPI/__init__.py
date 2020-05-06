@@ -6,5 +6,5 @@ import sys
 # append sys path
 # sys.path.append(path.dirname(__file__))
 
-from .tasks import check_taboo
+from .tasks import check_taboo, corrector
 
