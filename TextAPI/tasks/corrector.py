@@ -26,7 +26,7 @@ def text_corrector(text, confusion:bool=True, non_level="char"):
         close word level. None can support the two level
 
     Results:
-    @type dict, result, wrong words, and those start index
+    @type dict, results, wrong words, and those start index
 
     Examples:
     >>> text_corrector('少先队员因该为老人让坐') # add confusion and use char level
@@ -43,19 +43,21 @@ def text_corrector(text, confusion:bool=True, non_level="char"):
     # get wrong word information
     report = pycorrector.detect(text)
     if len(report) > 0:
-        result = defaultdict(dict)
+        results = []
     else:
-        return 
+        return []
 
     for index, item in enumerate(report):
+        result = {}
         if non_level is None:
-            result[index]["word"] = item[0]
-            result[index]["start_index"] = item[1]
+            result["word"] = item[0]
+            result["start_index"] = item[1]
         elif non_level == "char" and len(item[0]) > 1:
-            result[index]["word"] = item[0]
-            result[index]["start_index"] = item[1]
+            result["word"] = item[0]
+            result["start_index"] = item[1]
         elif non_level == "word" and len(item[0]) == 1:
-            result[index]["word"] = item[0]
-            result[index]["start_index"] = item[1] 
+            result["word"] = item[0]
+            result["start_index"] = item[1] 
+        results.append(result)
 
-    return result
+    return results

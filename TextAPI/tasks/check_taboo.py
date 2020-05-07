@@ -20,6 +20,13 @@ for word in TABOO:
 def taboo_stamp(text):
     words = [word for word in jieba.cut(text) if word in TABOO]
     if len(words) > 0:
-        return True
+        result = {
+            "taboo_status": True,
+            "words": words
+        }
+        return result
     else:
-        return False
+        return {
+            "taboo_status": False,
+            "words": []
+        }

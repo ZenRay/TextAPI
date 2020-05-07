@@ -10,15 +10,18 @@ API is used to check taboo and corrector words:
 
         HTTP/1.0 200 OK
         Content-Type: application/json
-        Content-Length: 192
+        Content-Length: 236
         Server: Werkzeug/0.11.15 Python/3.6.10
-        Date: Wed, 06 May 2020 08:56:39 GMT
+        Date: Thu, 07 May 2020 03:27:30 GMT
 
         {
-        "cost_time": 0.004797935485839844,
+        "cost_time": 0.00012493133544921875,
+        "data": {
+            "taboo_status": false,
+            "words": []
+        },
         "description": "it's successfull that check taboo words",
         "id": 123,
-        "report": false,
         "status": 200,
         "text": "\u5386\u53f2\u5b66\u7cfb"
         }
@@ -85,7 +88,7 @@ def taboo_stamp():
         "id": request.json["id"],
         "cost_time": end_time - start_time,
         "text": request.json["text"],
-        "report": taboo,
+        "data": taboo,
         "description": "it's successfull that check taboo words",
         "status": 200
     }
@@ -112,7 +115,7 @@ def correct_stamp():
         "id": request.json["id"],
         "cost_time": end_time - start_time,
         "text": request.json["text"],
-        "report": correct if correct else False,
+        "data": correct,
         "description": "it's successfull that check words",
         "status": 200
     }
