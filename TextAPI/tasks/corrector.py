@@ -58,6 +58,8 @@ def text_corrector(text, confusion:bool=True, non_level="char"):
         elif non_level == "word" and len(item[0]) == 1:
             result["word"] = item[0]
             result["start_index"] = item[1] 
-        results.append(result)
+        
+        if result:
+            results.append(result)
 
     return results
