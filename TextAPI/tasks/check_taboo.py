@@ -9,7 +9,7 @@ segment is the basis:
 from __future__ import absolute_import
 
 import jieba
-
+import re
 from TextAPI.config import TABOO
 
 # Add addictive words
@@ -30,3 +30,18 @@ def taboo_stamp(text):
             "taboo_status": False,
             "words": []
         }
+
+
+def taboo_stamp2(text):
+    """Regex Check Taboo"""
+    result = {
+            "taboo_status": False,
+            "words": []
+        }
+    for word in TABOO:
+        pattern = re.compile(word, re.I)
+        if bool(pattern.search(text)):
+            result["words"].append(word)
+            result["taboo_status"] = True
+    
+    return result

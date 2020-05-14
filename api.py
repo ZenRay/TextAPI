@@ -96,6 +96,31 @@ def taboo_stamp():
     return jsonify(result), 200
 
 
+@app.route("/text/api/v2.0/taboo", methods=["POST"])
+def taboo_stamp2():
+    """Request Taboo Check
+
+    Check taboo with regex
+    """
+    if not request.json or "text" not in request.json:
+        abort(400)
+    
+    # check taboo
+    start_time = time.time()
+    taboo = check_taboo.taboo_stamp2(request.json["text"])
+    end_time = time.time()
+
+    result = {
+        "id": request.json["id"],
+        "cost_time": end_time - start_time,
+        "text": request.json["text"],
+        "data": taboo,
+        "description": "it's successfull that check taboo words",
+        "status": 200
+    }
+
+    return jsonify(result), 200
+
 
 @app.route("/text/api/v1.0/correct", methods=["POST"])
 def correct_stamp():
